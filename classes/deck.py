@@ -66,7 +66,7 @@ class Deck:
 
         return removed_cards
 
-    def perpend(self, cards: List[Card]) -> None:
+    def prepend(self, cards: List[Card]) -> None:
         """
         Adds provided list of cards to the beginning of the current list of cards
         """

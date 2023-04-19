@@ -69,6 +69,6 @@ def test_splitting_deck_with_1_card():
 
 def tests_prepending():
     deck = Deck(["5♠", "6♠"])
-    deck.perpend([Card("3♠"), Card("4♠")])
+    deck.prepend([Card("3♠"), Card("4♠")])
 
     assert str(deck) == "3♠, 4♠, 5♠, 6♠"
