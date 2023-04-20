@@ -17,6 +17,15 @@ class Deck:
         """
         return ", ".join(str(card) for card in self.cards)
 
+    def __repr__(self) -> str:
+        """
+        Returns all cards joined by a comma
+        """
+        return ", ".join(str(card) for card in self.cards)
+
+    def __len__(self) -> int:
+        return len(self.cards)
+
     def split(self) -> Tuple["Deck", "Deck"]:
         """
         Splits the deck evenly into two decks.
@@ -71,6 +80,25 @@ class Deck:
         Adds provided list of cards to the beginning of the current list of cards
         """
         self.cards = cards + self.cards
+
+    def append(self, cards: List[Card]) -> None:
+        """
+        Adds provided list of cards to the end of the current list of cards
+        """
+        self.cards = self.cards + cards
+
+    def remove_all_cards(self) -> List[Card]:
+        """
+        Remove all cards from the deck
+        Returns: All removed cards
+        """
+        return self.pop(len(self.cards))
+
+    def shuffle_cards(self) -> None:
+        """
+        Shuffles cards in deck
+        """
+        random.shuffle(self.cards)
 
     @staticmethod
     def generate_shuffled_52_cards_deck() -> List[Card]:

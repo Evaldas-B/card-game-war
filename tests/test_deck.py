@@ -67,8 +67,31 @@ def test_splitting_deck_with_1_card():
     assert len(deck2.cards) == 0
 
 
-def tests_prepending():
+def test_prepending():
     deck = Deck(["5♠", "6♠"])
     deck.prepend([Card("3♠"), Card("4♠")])
 
     assert str(deck) == "3♠, 4♠, 5♠, 6♠"
+
+
+def test_appending():
+    deck = Deck([Card("A♦"), Card("K♦")])
+    deck.append([Card("Q♦"), Card("J♦")])
+
+    assert str(deck) == "A♦, K♦, Q♦, J♦"
+
+def test_removing_all_cards():
+    deck = Deck([Card("3♠"), Card("4♠")])
+
+    removed_cards = Deck(deck.remove_all_cards())
+
+    assert len(deck) == 0
+    assert len(removed_cards) == 2
+    assert str(removed_cards) == "3♠, 4♠"
+
+def test_length():
+    deck = Deck()
+    assert len(deck) == 0
+
+    deck.prepend([Card("3♠"), Card("4♠")])
+    assert len(deck) == 2

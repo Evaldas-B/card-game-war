@@ -17,6 +17,12 @@ class Card:
         """
         return f"{self.value}{self.suit}"
 
+    def __repr__(self) -> str:
+        """
+        Returns card in this format: A♥
+        """
+        return f"{self.value}{self.suit}"
+
     def get_numeric_value(self) -> int:
         """
         Returns the numeric value of the card, where A is 14, K is 13, Q is 12, J is 11, and all other cards
