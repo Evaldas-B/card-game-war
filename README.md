@@ -4,7 +4,7 @@ The goal is to implement a program that simulates card game war as described in 
 
 ### Deviations
 Cards deck has 52 cards:
-♠ ♥ ♣ ♦
+♤ ♡ ♧ ♢
 A K Q J 10 9 8 7 6 5 4 3 2
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/J5vT33Vo04s/0.jpg)](https://www.youtube.com/watch?v=J5vT33Vo04s)

@@ -4,7 +4,7 @@ import random
 
 
 card_values = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
-card_suits = "♠♥♣♦"
+card_suits = "♤♡♧♢"
 
 
 class Deck:

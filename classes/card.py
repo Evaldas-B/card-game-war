@@ -3,23 +3,23 @@ import re
 
 class Card:
     def __init__(self, card_expression: str) -> None:
-        card_elements = re.match(r"^([AKQJ]|10|[2-9])([♠♥♣♦])$", card_expression)
+        card_elements = re.match(r"^([AKQJ]|10|[2-9])([♤♡♧♢])$", card_expression)
 
         if not card_elements:
-            raise ValueError("Expecting card_expression to be in this format: A♥")
+            raise ValueError("Expecting card_expression to be in this format: A♡")
 
         self.value = card_elements.group(1)
         self.suit = card_elements.group(2)
 
     def __str__(self) -> str:
         """
-        Returns card in this format: A♥
+        Returns card in this format: A♡
         """
         return f"{self.value}{self.suit}"
 
     def __repr__(self) -> str:
         """
-        Returns card in this format: A♥
+        Returns card in this format: A♡
         """
         return f"{self.value}{self.suit}"
 

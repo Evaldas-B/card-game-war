@@ -148,8 +148,8 @@ class Game:
         """
         Returns round summary in this format:
         ******* Round n *******
-        P1: A♦
-        P2: K♦
+        P1: A♢
+        P2: K♢
         Winner: P1
 
         P1 remaining cards: 27
