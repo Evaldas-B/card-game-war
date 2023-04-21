@@ -1,6 +1,13 @@
 import random
-from typing import List
+from classes.card import Card
+from typing import List, Literal, TypedDict, Optional
 from classes.deck import Deck
+
+
+class RoundHistory(TypedDict, total=False):
+    P1: Card
+    P2: Card
+    Winner: Optional[Literal["P1", "P2", "Draw"]]
 
 
 class Game:
@@ -18,7 +25,8 @@ class Game:
         self.p1_discard_pile = Deck([])
         self.p2_discard_pile = Deck([])
 
-        self.history: List[str] = []
+        self.rounds = 0
+        self.history: List[RoundHistory] = []
 
     def is_war(self):
         """
@@ -45,19 +53,18 @@ class Game:
         """
         self.repopulate_decks()
 
-        history: List[str] = []
-
         # If there is a war each player places 3 cards
         if self.is_war():
-            history.append("War, both players place 3 cards")
             self.p1_playing_pile.append(self.p1_deck.pop(3))
             self.p2_playing_pile.append(self.p2_deck.pop(3))
 
         # Each player places 1 card
         p1_card = self.p1_deck.pop(1)
         p2_card = self.p2_deck.pop(1)
-        history.append(f"player 1 places {str(p1_card)}")
-        history.append(f"player 2 places {str(p2_card)}")
+        round_history: RoundHistory = {
+            "P1": p1_card[0],
+            "P2": p2_card[0],
+        }
 
         self.p1_playing_pile.append(p1_card)
         self.p2_playing_pile.append(p2_card)
@@ -67,20 +74,19 @@ class Game:
             table_cards = self.p1_playing_pile.remove_all_cards()
             table_cards += self.p2_playing_pile.remove_all_cards()
             self.p1_discard_pile.cards += table_cards
-
-            history.append(
-                f"p1 wins this round and collects {len(table_cards)} card(s) from table"
-            )
+            round_history["Winner"] = "P1"
 
         elif self.p2_playing_pile.cards[-1] > self.p1_playing_pile.cards[-1]:
             table_cards = self.p1_playing_pile.remove_all_cards()
             table_cards += self.p2_playing_pile.remove_all_cards()
             self.p2_discard_pile.cards += table_cards
+            round_history["Winner"] = "P2"
 
-            history.append(
-                f"p2 wins this round and collects {len(table_cards)} card(s) from table"
-            )
+        else:
+            round_history["Winner"] = "Draw"
 
+        self.history.append(round_history)
+        self.rounds += 1
         return self.round_possible()
 
     def repopulate_decks(self) -> None:
@@ -137,3 +143,17 @@ class Game:
                 return False
 
         return True
+
+    def round_summary(self) -> str:
+        """
+        Returns round summary in this format:
+        ******* Round n *******
+        P1: A♦
+        P2: K♦
+        Winner: P1
+
+        P1 remaining cards: 27
+        P2 remaining cards: 25
+        """
+
+        return "TODO: should return round summary in specified format"
