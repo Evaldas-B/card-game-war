@@ -9,7 +9,6 @@ class RoundHistory(TypedDict, total=False):
     P2: Card
     Winner: Optional[Literal["P1", "P2", "Draw"]]
 
-
 class Game:
     def __init__(self) -> None:
         """
@@ -155,5 +154,13 @@ class Game:
         P1 remaining cards: 27
         P2 remaining cards: 25
         """
+        
+        summary = [f"******* Round {self.rounds} *******",
+                 f"P1: {self.history[-1]['P1']}",
+                 f"P2: {self.history[-1]['P2']}",
+                 f"Winner: {self.history[-1]['Winner']}\n",
+                 f"P1 remaining cards: {len(self.p1_deck) + len(self.p1_discard_pile)}",
+                f"P2 remaining cards: {len(self.p2_deck) + len(self.p2_discard_pile)}\n\n"]
 
-        return "TODO: should return round summary in specified format"
+        return "\n".join(summary)    
+        
